@@ -6,11 +6,10 @@ const port = 8080
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 
-
 app.get('/products', async(req,res) =>{
     try {
         const productsArray = await productManager.readProducts()
-        let limit = parseInt(req.query.limit)
+        const limit = parseInt(req.query.limit)
         if(limit){
             const arrayLimit = productsArray.splice(0, limit)
             return res.send(arrayLimit)
@@ -20,21 +19,21 @@ app.get('/products', async(req,res) =>{
         }
         
     } catch (error) {
-        res.send("error")
+        res.status(404).json({message: "No se encontraron los productos"})
         
     }
 })
 
 app.get('/products/:id', async(req,res) =>{
     try {
-        let produId = parseInt(req.params.id)
+        const produId = parseInt(req.params.id)
         const pFound = await productManager.getProductById(produId)
         if(produId){
             return res.send(pFound)
         }
     } catch (error) {
-        res.send("Error al encontrar el producto por id")
-        
+        res.status(404).json({message: "No se encontro el producto"})
+    
     }
 
 }
