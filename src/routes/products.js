@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router()
 
-const ProductManager = require("./productManager")
+const ProductManager = require("../productManager")
 
 const productManager = new ProductManager("./src/Productos.json")
 
@@ -12,10 +12,10 @@ router.get('/products', async(req,res) =>{
         const limit = parseInt(req.query.limit)
         if(limit){
             const arrayLimit = productsArray.slice(0, limit)
-            return res.send(arrayLimit)
+            return res.json(arrayLimit)
         }
         else{
-            res.send(productsArray)
+            res.json(productsArray)
         }
         
     } catch (error) {
@@ -29,13 +29,25 @@ router.get('/products/:id', async(req,res) =>{
         const produId = parseInt(req.params.id)
         const pFound = await productManager.getProductById(produId)
         if(produId){
-            return res.send(pFound)
+            return res.json(pFound)
         }
     } catch (error) {
         res.status(404).json({message: "No se encontro el producto"})
     
     }
 
+
+router.post('/products', async(req,res) =>{
+    try {
+        const newP = (req.body)
+        const productAdd = await productManager.addProduct(newP)
+        res.json(productAdd)
+    } catch (error) {
+        res.status(404).json({message: "Error al agregar el producto"})
+    }
+
+
+}) 
 }
 )
 module.exports = router

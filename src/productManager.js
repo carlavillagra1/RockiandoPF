@@ -45,7 +45,9 @@ class ProductManager {
             product.price &&
             product.thumbnail &&
             product.code &&
-            product.stock !== undefined
+            product.stock !== undefined &&
+            product.category &&
+            product.status
         )
     }
     codeDuplicate(code, products) {
@@ -136,6 +138,14 @@ class ProductManager {
                 newProduct = {...products[index], stock: valor} 
                 products[index] = newProduct
                 break;
+            case "category":
+                newProduct = {...products[index], category: valor}
+                products[index] = newProduct
+                break
+            case "status":
+                newProduct = {...products[index], status: true}
+                products[index] = newProduct
+                break
                 case undefined:
                     products[index] = { id: products[index].id, ...obj };
                     break;
