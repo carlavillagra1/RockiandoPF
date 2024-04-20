@@ -35,19 +35,26 @@ router.get('/products/:id', async(req,res) =>{
         res.status(404).json({message: "No se encontro el producto"})
     
     }
-
-
+})
 router.post('/products', async(req,res) =>{
     try {
-        const newP = (req.body)
+        const newP = req.body
         const productAdd = await productManager.addProduct(newP)
         res.json(productAdd)
     } catch (error) {
         res.status(404).json({message: "Error al agregar el producto"})
     }
+})
 
-
-}) 
-}
-)
+router.put('/products/:id', async(req,res)=>{
+    try {
+        const prodId = parseInt(req.params.id)
+        const producUpdate = await productManager.updateProduct(prodId, obj, campo, valor)
+        if(prodId){
+        return res.json(producUpdate)
+    }
+    } catch (error) {
+        res.status(404).json({message: "No se pudo modificar el producto"})
+    }
+})
 module.exports = router
