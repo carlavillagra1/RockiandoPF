@@ -49,12 +49,27 @@ router.post('/products', async(req,res) =>{
 router.put('/products/:id', async(req,res)=>{
     try {
         const prodId = parseInt(req.params.id)
+        const {obj, campo, valor } = req.body
         const producUpdate = await productManager.updateProduct(prodId, obj, campo, valor)
         if(prodId){
         return res.json(producUpdate)
     }
     } catch (error) {
         res.status(404).json({message: "No se pudo modificar el producto"})
+    }
+})
+
+router.delete('/products/:id', async(req,res)=>{
+    try {
+        const producId = parseInt(req.params.id)
+        const prodDelete  = await productManager.deleteById(producId)
+        if(producId){
+            return res.json(prodDelete)
+        }
+
+    } catch (error) {
+        res.status(404).json({message: "No se pudo eliminar el producto"})
+        
     }
 })
 module.exports = router
