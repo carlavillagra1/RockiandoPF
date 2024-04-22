@@ -6,7 +6,7 @@ const ProductManager = require("../productManager")
 
 const productManager = new ProductManager("./src/Productos.json")
 
-router.get('/products', async(req,res) =>{
+router.get('/', async(req,res) =>{
     try {
         const productsArray = await productManager.readProducts()
         const limit = parseInt(req.query.limit)
@@ -24,7 +24,7 @@ router.get('/products', async(req,res) =>{
     }
 })
 
-router.get('/products/:id', async(req,res) =>{
+router.get('/:id', async(req,res) =>{
     try {
         const produId = parseInt(req.params.id)
         const pFound = await productManager.getProductById(produId)
@@ -36,7 +36,7 @@ router.get('/products/:id', async(req,res) =>{
     
     }
 })
-router.post('/products', async(req,res) =>{
+router.post('/', async(req,res) =>{
     try {
         const newP = req.body
         const productAdd = await productManager.addProduct(newP)
@@ -46,7 +46,7 @@ router.post('/products', async(req,res) =>{
     }
 })
 
-router.put('/products/:id', async(req,res)=>{
+router.put('/:id', async(req,res)=>{
     try {
         const prodId = parseInt(req.params.id)
         const {obj, campo, valor } = req.body
@@ -59,7 +59,7 @@ router.put('/products/:id', async(req,res)=>{
     }
 })
 
-router.delete('/products/:id', async(req,res)=>{
+router.delete('/:id', async(req,res)=>{
     try {
         const producId = parseInt(req.params.id)
         const prodDelete  = await productManager.deleteById(producId)

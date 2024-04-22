@@ -2,18 +2,19 @@ const express = require("express");
 
 const router = express.Router()
 
-const Carts = require("../cartsClass")
+const CartsManager = require("../cartsClass")
 
-const cartclass = new Carts("./src/Carrito.json")
+const cartclass = new CartsManager("./src/Carrito.json")
 
 const ProductManager = require("../productManager")
 
-const productManager = new ProductManager("./src/Productos,json")
+const productManager = new ProductManager("./src/Productos.json")
 
 
-router.get('/:id', async(req,res) =>{
+router.get('/:cid', async(req,res) =>{
+    const cartID =parseInt(req.params.cid)
     try {
-        const cartsArray = await cartclass.readCart()
+        const cartsArray = await cartclass.getProductFromCart(cartID)
         res.json(cartsArray)
         
     } catch (error) {
@@ -25,20 +26,27 @@ router.post('/', async(req,res) =>{
     try {
         const addCart = await cartclass.addToCart()
         res.json(addCart)
+
     } catch (error) {
         res.status(404).json({message: "Error al agregar un carrito"})
     
     }
 })
 
-router.post('/:id/product/:pid', async(req,res) =>{
+router.post('/:cid/product/:id', async(req,res) =>{
     try {
-        const  productList = await productManager.readProducts()
-        const cartID = (req.params.id)
-        const addProduCart = await cartclass.addToCart(productList)
-        res.json(addProduCart(cartID))
-        
+    
+        const cartID = parseInt(req.params.cid)
+        const productID = parseInt(req.params.id)
+        const product = await productManager.getProductById(productID)
+        if(!product){
+            return res.status(404).json({message:"Producto no encontrado"})
+        }
+        const result = await  cartclass.addToProductCart(cartID, productID)
+        res.json(result)
     } catch (error) {
+        res.status(404).json({message:"error "})
+        
         
     }
 

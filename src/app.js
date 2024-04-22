@@ -10,8 +10,8 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use("/", productsRouter)
-app.use("/", cartsRouter)
+app.use("/api/products", productsRouter)
+app.use("/api/carts", cartsRouter)
 
 app.use("/", (req, res)=>{
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
