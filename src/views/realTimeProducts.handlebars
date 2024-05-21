@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Agregar productos</h1>
-    <form action="/api/products" method="post">
+<div> 
         <label for="title">Titulo</label>
         <input type="text"  name="title"  id="title">
         <label for="description"> Descripcion</label>
         <input type="text" name="description" id="description">
         <label for="price">Precio</label>
         <input type="number" name="price" id="price">
-        <label for="thumbnail"> Thumbnail</label>
+        <label for="thumbnail">Thumbnail</label>
         <input type="text" name="thumbnail" id="thumbnail">
         <label for="code">Codigo</label>
         <input type="text" name="code" id="code">
@@ -22,10 +13,10 @@
         <input type="number" name="stock" id="stock"> 
         <label for="category">Categoria</label>
         <input type="text" name="category" id="category">
-        <label for="status"> Status</label>
-        <input type="text" name="status" id="status">
-        <button type="submit">Agregar producto</button>
-    </form>
-    
-</body>
-</html>
+        <button type="button" id="btnAgregar">Agregar producto</button>
+        </div>
+
+        <div id="productsList"> </div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/realtimeProducts.js"></script>
+        <script src="/css/index.css"></script>

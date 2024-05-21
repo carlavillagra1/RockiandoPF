@@ -1,0 +1,10 @@
+.container{
+    background: red;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+}
+.carts{
+    background: blue;
+    width: 250px;
+}

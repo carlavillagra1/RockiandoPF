@@ -1,0 +1,34 @@
+<div class="container">
+ {{#if isValid}}
+<div>
+    <ul>
+        {{#each docs}}
+        <li class="contenedor">
+            <strong class="info">Title:</strong> {{this.title}},
+            <strong class="info">Descripción:</strong> {{this.description}},
+            <strong class="info">Precio:</strong> {{this.price}},
+            <strong class="info">Stock:</strong> {{this.stock}},
+            <strong class="info">Código:</strong> {{this.code}}
+            <button id="btnCart">Agregar al carrito</button>
+        </li>
+        <br>
+        {{/each}}
+    </ul>
+</div>
+<br>
+<div>
+    {{#if hasPrevPage}}
+    <a href="{{prevLink}}"> << Anterior </a>
+    {{/if}}
+    &nbsp;
+    {{page}}
+    &nbsp;
+    {{#if hasNextPage}}
+    <a href="{{nextLink}}"> Siguiente >></a>
+    {{/if}}
+</div>
+{{else}}
+<h1>No hay productos para mostrar</h1>
+{{/if}}
+
+</div> 
