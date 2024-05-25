@@ -11,7 +11,8 @@ const productSchema = new mongoose.Schema({
     code: { type: String, required: true, max: 50 },
     status: { type: Boolean , default: true},
     stock: { type: Number , required: true },
-    category: {type: String, required: true}
+    category: {type: String, required: true},
+    
 })
 
 productSchema.plugin(mongoosePaginate);

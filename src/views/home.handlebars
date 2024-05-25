@@ -1,30 +1,23 @@
+
 <div class="container">
- {{#if isValid}}
-<div>
-    <ul>
-        {{#each docs}}
-        <li class="contenedor">
-            <strong class="info">Title:</strong> {{this.title}},
-            <strong class="info">Descripción:</strong> {{this.description}},
-            <strong class="info">Precio:</strong> {{this.price}},
-            <strong class="info">Stock:</strong> {{this.stock}},
-            <strong class="info">Código:</strong> {{this.code}}
-            <button id="btnCart">Agregar al carrito</button>
-        </li>
-        <br>
+ {{#if result.isValid}}
+<div class="contenedorCarts">
+        {{#each result.docs}}
+        <div class="carts">
+            <strong class="infoFoto"> {{this.thumbnail}}</strong> 
+            <strong class="info"> {{this.title}}</strong> 
+            <strong class="info">Precio: ${{this.price}}</strong> 
+            <a href="http:/api/views/productDetail/{{this._id}}" class="btnDetail">Ver detalles</a>
+        </div>
         {{/each}}
-    </ul>
 </div>
-<br>
-<div>
-    {{#if hasPrevPage}}
-    <a href="{{prevLink}}"> << Anterior </a>
+<div class="paginate">
+    {{#if result.hasPrevPage}}
+    <a href="{{result.prevLink}}"> << Anterior </a>
     {{/if}}
-    &nbsp;
-    {{page}}
-    &nbsp;
-    {{#if hasNextPage}}
-    <a href="{{nextLink}}"> Siguiente >></a>
+    {{result.page}}
+    {{#if result.hasNextPage}}
+    <a href="{{result.nextLink}}"> Siguiente >></a>
     {{/if}}
 </div>
 {{else}}

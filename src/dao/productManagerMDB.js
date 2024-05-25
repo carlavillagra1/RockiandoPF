@@ -1,4 +1,5 @@
 const productModel = require("./models/product.model.js")
+const cartsModel  = require("./models/carts.model.js")
 
 class productManagerMongo {
 
