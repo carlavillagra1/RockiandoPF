@@ -23,7 +23,7 @@ class cartManagerMongo{
     }
     async cartById(cid) {
         try {
-            const cart = await cartsModel.findById(cid);
+            const cart = await cartsModel.findById(cid).lean()
             if (!cart) {
                 const newCart = new cartsModel({ _id: cid, products: [], total: 0 });
                 await newCart.save();
@@ -55,6 +55,17 @@ class cartManagerMongo{
             return cartDelete
         } catch (error) {
             throw new Error("Error al eliminar el carrito")
+        }
+    }
+    async updateCart(cid, updatedCart) {
+        try {
+            const cartUpdate = await cartsModel.updateOne(
+                { _id: cid },
+                { $set: { products: updatedCart.products } }
+            );
+            return cartUpdate;
+        } catch (error) {
+            throw new Error("Error al actualizar el carrito");
         }
     }
     

@@ -1,17 +1,21 @@
 
-
-    <div class="container">
-        <h2>Carrito de Compras</h2>
-        <ul>
-            {{#each cart}}
-            <li>
-                <strong>{{cart.product.title}}</strong> - Cantidad: {{cart.quantity}} - Precio: ${{cart.price}}
-            </li>
+<div class="container">
+    <h2>Carrito de Compras</h2>
+    <ul>
+        {{#if cartGroupedProducts.length}}
+            {{#each cartGroupedProducts}}
+                <li>
+                    <strong>{{this.title}}</strong> - Cantidad: {{this.totalQuantity}} - Precio: ${{this.price}}
+                    <strong>Subtotal:</strong>
+                </li>
             {{/each}}
-        </ul>
+                <strong>Total:</strong>
         {{else}}
-        <p>El carrito está vacío.</p>
-        <div class="volver">
-            <a href="http:/api/views/home"> Volver a home</a>
-        </div>
+            <p>El carrito está vacío.</p>
+        {{/if}}
+    </ul>
+    <div class="volver">
+        <a href="/api/views/home">Volver a home</a>
     </div>
+</div>
+
