@@ -7,6 +7,10 @@
 
  `npm start`
 
+*_Configuracion de la base de datos_*
+
+` MONGO_URL= mongodb+srv://Carla:95371564@rockiando.cgnmmus.mongodb.net/ecommerce2?retryWrites=true&w=majority&appName=Rockiando`
+
 Luego de inicializar en la terminal, abrir en chrome y escribir el puerto que estaremos utilizando en el servidor local.
 
 ` localhost:8080/api/views/home`
