@@ -1,58 +1,37 @@
 # Rockiando Sport 
 ###  Proyecto de backend
-#### Esta es la primer entrega del proyecto final.
+#### Esta es la segunda entrega del proyecto final.
+##### Para ver las consignas como eliminar un producto del carrito, vaciar carrito y actualizar cantidad de productos dentro del  carrito, se  pueden vizualizar con POSTMAN por el momento.
 
 *_Para inicializar, en la terminal escribir lo siguiente :_*
 
  `npm start`
 
-Luego de inicializar en la terminal, abrir POSTMAN y escribir el puerto que estaremos utilizando en el servidor local.
+Luego de inicializar en la terminal, abrir en chrome y escribir el puerto que estaremos utilizando en el servidor local.
+
+` localhost:8080/api/views/home`
  
-` localhost:8080`
 
 *Las rutas para productos y para el carrito son las siguientes:*
 
- productos: `localhost:8080/api/products`
+` localhost:8080/api/views/home`
 
- carrito: `localhost:8080/api/carts`
-
-* Consigna 1 : La ruta post/ debera crear un producto.
+![](/imgREADME/home.png)
 
 
-![](/imgREADME/cap.png)
+`localhost:8080/api/views/cart`
 
- Se agrego el producto.
+![](/imgREADME/carrito.png)
 
-![](/imgREADME/cap2.png)
+* Para agregar un producto ir a la sguiente ruta y te muestra en tiempo real los productos y el que se creo
 
+ `localhost:8080/api/views/realTimeProducts`
 
-
-* Consigna 2 : La ruta put/:id debera tomar el producto de dicho id y actualizar los campos, no se debe actualizar ni eliminar dicho id.
- ![](/imgREADME/cap3.png)
-
-* Consigna 3 :  La ruta delete/:id debera tomar dicho producto con el id indicado y eliminarlo.
-
-  Muestro el productocon el id 5
- ![](/imgREADME/cap4.png)
-
-   Lo borro
- ![](/imgREADME/capborrar.png)
+![](/imgREADME/agregar.png)
 
 
 
-* Consigna 4 :  Para el carrito la ruta post/ debera crear un carrito con la siguiente estructura : id, products: [] .
-![](/imgREADME/cap5.png)
+* Filtrar por categorias, se puede elegir el limite de productos que deseas ver, filtrar por precios de mayor a menor o al revez. Y tiene paginado
 
-
-* CONSIGNA 6 : Para el carrito la ruta get/:cid debera listar los productos que pertenezcan a dicho carrito con el id proporcionado.
-![](/imgREADME/cap8.png)
-
-* Consigna 7 : Para el carrito la ruta post/cid/product/pid debera agregar dicho producto que contenga ese id, ademas se agregara de uno en uno con el quantity incremetandose.
-
-Lo agregue 2 veces asi muestro el quantity que se sumo.
-![](/imgREADME/cap7.png)
-
-
-
-
+ ![](/imgREADME/filtrado.png)
 

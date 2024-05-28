@@ -183,3 +183,18 @@
     background: gray;
     border: none;
 }
+.carrito{
+    background: gray;
+    width: 550px;
+    align-items: center;
+    height: 200px;
+    color: aliceblue;
+    border-radius: 10px;
+    padding: 10px;
+}
+.lista{
+    background: gray;
+    width: 550px;
+    align-items: center;
+    color: aliceblue;
+}

@@ -1,53 +1,55 @@
 
     <div class="contenedorFilter">
-        <!-- Menú desplegable para filtrar por categoría -->
-        <div class="sectionCategory"> 
-            <select id="categoria-select" onchange="filtrarProductos()" class="category">
-                <option value="">Selecciona una categoría</option>
-                <option value="mujer">Mujer</option>
-                <option value="hombre">Hombre</option>
-                <option value="niño">Niño</option>
-            </select>
-        </div> 
-        <div class="sectionInput">
-            <p class="Limite">Limite</p>
-            <input type="number" id="limit-input" placeholder="Limit" value="5" class="limit">
-            <input type="text" id="query-input" placeholder="Buscar" class="buscador">
-            <select id="sort-select" class="precios">
-                <option value="">Precios</option>
-                <option value="desc">Mayor a menor</option>
-                <option value="asc">Menor a mayor</option>
-            </select>
-            <button onclick="filtrarProductos()" class="btn">Buscar</button>
-        </div>
+    <!-- Menú desplegable para filtrar por categoría -->
+    <div class="sectionCategory"> 
+        <select id="categoria-select" onchange="filtrarProductos()" class="category">
+            <option value="productos">Selecciona una categoría</option>
+            <option value="mujer">Mujer</option>
+            <option value="hombre">Hombre</option>
+            <option value="niño">Niño</option>
+        </select>
+    </div> 
+    <div class="sectionInput">
+        <p class="Limite">Limite</p>
+        <input type="number" id="limit-input" placeholder="Limit" value="5" class="limit">
+        <input type="text" id="query-input" placeholder="Buscar" class="buscador">
+        <select id="sort-select" class="precios">
+            <option value="">Precios</option>
+            <option value="desc">Mayor a menor</option>
+            <option value="asc">Menor a mayor</option>
+        </select>
+        <button onclick="filtrarProductos()" class="btn">Buscar</button>
     </div>
+</div>
 
-    <div id="productos" class="contenedorCarts">
-        <!-- Aquí se mostrarán los productos filtrados -->
+<div id="productos" class="contenedorCarts">
+    <!-- Aquí se mostrarán los productos filtrados -->
+</div>
+
+<div class="container">
+    {{#if result.isValid}}
+    <div class="contenedorCarts">
+        {{#each result.docs}}
+        <div class="carts">
+            <strong class="infoFoto">{{this.thumbnail}}</strong>
+            <strong class="info">{{this.title}}</strong>
+            <strong class="info">Precio: ${{this.price}}</strong>
+            <a href="/api/views/productDetail/{{this._id}}" class="btnDetail">Ver detalles</a>
+        </div>
+        {{/each}}
     </div>
-        <div class="container">
-        {{#if result.isValid}}
-        <div class="contenedorCarts">
-            {{#each docs}}
-            <div class="carts">
-                <strong class="infoFoto">{{this.thumbnail}}</strong>
-                <strong class="info">{{this.title}}</strong>
-                <strong class="info">Precio: ${{this.price}}</strong>
-                <a href="/api/views/productDetail/{{this._id}}" class="btnDetail">Ver detalles</a>
-            </div>
-            {{/each}}
-        </div>
-        <div class="paginate">
-            {{#if hasPrevPage}}
-            <a href="{{prevLink}}"><< Anterior</a>
-            {{/if}}
-            {{page}}
-            {{#if hasNextPage}}
-            <a href="{{nextLink}}">Siguiente >></a>
-            {{/if}}
-        </div>
-        {{else}}
-        <h1>No hay productos para mostrar</h1>
+    <div class="paginate">
+        {{#if result.hasPrevPage}}
+        <a href="{{result.prevLink}}"><< Anterior</a>
         {{/if}}
-        </div>
-    <script src="/js/filterProducts.js"></script>
+        <span> Pagina {{result.page}} de {{result.totalPages}}</span> 
+        {{#if result.hasNextPage}}
+        <a href="{{result.nextLink}}">Siguiente >></a>
+        {{/if}}
+    </div>
+    {{else}}
+    <h1>No hay productos para mostrar</h1>
+    {{/if}}
+</div>
+
+<script src="/js/filterProducts.js"></script>

@@ -1,9 +1,10 @@
 const express = require("express");
-const router = express.Router()
 const cartManagerMongo = require("../dao/cartsManagerMDB");
 const cartManager = new cartManagerMongo();
 const productManagerMongo = require("../dao/productManagerMDB.js");
 const productManager = new productManagerMongo();
+
+const router = express.Router();
 
 router.get('/home', async (req, res) => {
     try {
@@ -12,6 +13,7 @@ router.get('/home', async (req, res) => {
         let sort = req.query.sort || '';
         let query = req.query.query || '';
         let categoria = req.query.categoria || '';
+
         const result = await productManager.paginateProduct({ page, limit, sort, query, categoria });
         result.prevLink = result.hasPrevPage ? `http://localhost:8080/api/views/home?page=${result.prevPage}&limit=${limit}&sort=${sort}&query=${query}&categoria=${categoria}` : '';
         result.nextLink = result.hasNextPage ? `http://localhost:8080/api/views/home?page=${result.nextPage}&limit=${limit}&sort=${sort}&query=${query}&categoria=${categoria}` : '';
@@ -27,21 +29,23 @@ router.get('/home', async (req, res) => {
 router.get('/productDetail/:id', async (req, res) => {
     try {
         const { id } = req.params
-        const product = await productManager.getProductById(id)
+        const product = await productManager.getProductById(id);
         if (product)
-            res.render('productDetail', { product, style: 'index.css' })
+            res.render('productDetail', { product, style: 'index.css' });
+        else
+            res.status(404).send('Producto no encontrado');
     } catch (error) {
         res.status(404).send('Producto no encontrado');
     }
-})
+});
+
 router.get('/chat', (req, res) => {
-    res.render('chat', { style: 'index.css' })
-})
+    res.render('chat', { style: 'index.css' });
+});
 
 router.get('/realTimeProducts', (req, res) => {
-    res.render("realTimeProducts", {})
-})
-
+    res.render("realTimeProducts",{});
+});
 
 router.get('/cart', async (req, res) => {
     try {
@@ -50,7 +54,7 @@ router.get('/cart', async (req, res) => {
         if (!cart || !cart.products || cart.products.length === 0) {
             return res.render('cart', { cart: { products: [] } });
         }
-        // Agrupar los productos por su ID y calcular la cantidad total para cada grupo
+
         const groupedProducts = cart.products.reduce((acc, product) => {
             const productId = product.product._id.toString();
             if (!acc[productId]) {
@@ -63,20 +67,13 @@ router.get('/cart', async (req, res) => {
             acc[productId].totalQuantity += product.quantity;
             return acc;
         }, {});
-        // Convertir el objeto de agrupación en una matriz de objetos
+
         const cartGroupedProducts = Object.values(groupedProducts);
-        // Renderizar la plantilla con los productos agrupados
-        res.render('cart', { cartGroupedProducts });
+        res.render('cart', { cartGroupedProducts, style:'index.css' });
     } catch (error) {
         console.error(error);
         res.status(500).send('Error al obtener el carrito');
     }
 });
 
-
-
-module.exports = router
-
-
-
-
+module.exports = router;

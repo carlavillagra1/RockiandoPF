@@ -69,11 +69,12 @@ router.delete('/:id', async (req, res, next) => {
         next(error);
     }
 });
+
 router.get('/filtrar/:categoria', async (req, res) => {
     try {
         const { categoria } = req.params;
         let { page, limit, sort, query } = req.query;
-        // Convertir page a un número entero válido
+        // Convertir page y limit a números enteros válidos
         page = parseInt(page, 10) || 1;
         const limitNumber = parseInt(limit, 10) || 5;
         const result = await productManager.filterCategory({ categoria, page, limit: limitNumber, sort, query });
@@ -83,8 +84,6 @@ router.get('/filtrar/:categoria', async (req, res) => {
         res.status(500).json({ isValid: false, error: 'Error al filtrar productos' });
     }
 });
-
-
 
 module.exports = router;
 
