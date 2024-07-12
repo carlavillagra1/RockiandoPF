@@ -45,7 +45,7 @@ document.getElementById('finalize-purchase').addEventListener('click', async fun
             if (clearResponse.ok) {
                 alert('El carrito se ha vaciado con éxito');
                 // Redirigir al usuario a la página del ticket
-                window.location.href = `/api/views/tickets/${result.payload._id}`;
+               // window.location.href = `/api/views/tickets/${result.payload._id}`;
             } else {
                 const error = await clearResponse.json();
                 alert('Error al vaciar el carrito: ' + error.message);

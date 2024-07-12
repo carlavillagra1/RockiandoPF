@@ -36,9 +36,9 @@ class productRepository {
     }
     
     
-    async updateProduct(id) {
+    async updateProduct(id, updatedData) {
         try {
-            const productUpdate = await productModel.updateOne({_id: id})
+            const productUpdate = await productModel.findByIdAndUpdate(id, updatedData, { new: true });
             return productUpdate
         } catch (error) {
             throw new Error("Error al modificar el producto")

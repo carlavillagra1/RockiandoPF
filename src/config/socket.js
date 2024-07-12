@@ -73,6 +73,19 @@ const initializeSocket = (httpServer) => {
                 .catch((error) =>
                     socket.emit('responseDelete', 'Error al eliminar el producto: ' + error.message));
         });
+        socket.on('editarProduct', data => {
+            const { id, updatedProduct } = data;
+            productManager.updateProduct(id, updatedProduct)
+                .then(() => {
+                    productManager.readProducts()
+                        .then((products) => {
+                            socket.emit('products', products);
+                            socket.emit('responseEdit', 'Producto actualizado');
+                        });
+                })
+                .catch((error) =>
+                    socket.emit('responseEdit', 'Error al actualizar el producto' + error.message));
+        });
     });
 
     return io;
