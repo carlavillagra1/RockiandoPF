@@ -1,0 +1,35 @@
+<div class="container">
+
+    <h2>Detalles del Ticket</h2>
+
+    <div class="perfil">
+        <p>Cliente: {{ticket.email}}</p>
+
+        <div>
+            <h4>Productos</h4>
+            <ul>
+                {{#each ticket.products}}
+                <li>
+                    <strong>Producto:</strong> {{title}}
+                    <strong>Precio:</strong> ${{price}}
+                    <strong>Cantidad:</strong> {{quantity}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+        <div>
+            <h4>Total</h4>
+            <p>${{ticket.totalAmount}}</p>
+        </div>
+
+        <div>
+            <h4>Fecha de Creación</h4>
+            <p>{{ticket.createdAt}}</p>
+        </div>
+
+    </div>
+    <div class="volver">
+        <a href="/api/views/home">Volver a home</a>
+    </div>
+</div>

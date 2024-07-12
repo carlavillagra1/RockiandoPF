@@ -22,7 +22,7 @@ socket.on('messages', messages =>{
         })
         
         p.innerHTML = `
-        <strong>Email: </strong>${message.user},
+        <strong>Email: </strong>${message.user}
         <strong>Message: </strong>${message.message}
         `
         messagesList.appendChild(p)

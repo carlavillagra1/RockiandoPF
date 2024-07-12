@@ -1,7 +1,7 @@
 const productModel = require("./models/product.model.js")
 const cartsModel  = require("./models/carts.model.js")
 
-class productManagerMongo {
+class productRepository {
 
     async createProduct(title, description, price, thumbnail, code, stock, category) {
         try {
@@ -134,4 +134,4 @@ class productManagerMongo {
 
 
 
-module.exports = productManagerMongo
+module.exports = productRepository

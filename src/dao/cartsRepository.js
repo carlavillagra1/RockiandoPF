@@ -1,7 +1,7 @@
 const cartsModel  = require("./models/carts.model.js")
 const productModel = require("./models/product.model.js")
 
-class cartManagerMongo{
+class cartRepository{
     
     async createCart(products = [] , total = 0 ){
         try {
@@ -68,6 +68,21 @@ class cartManagerMongo{
             throw new Error("Error al actualizar el carrito");
         }
     }
-    
+
+    async clearCartProducts(cid) {
+        try {
+            const cart = await cartsModel.findById(cid) // Asegúrate de que sea un documento de Mongoose
+            if (!cart) {
+                throw new Error('Carrito no encontrado');
+            }
+            cart.products = [];  // Vacía los productos del carrito
+            await cart.save();  // Guarda los cambios
+            return cart;
+        } catch (error) {
+            console.error('Error al vaciar el carrito:', error);
+            throw error;
+        }
+    };
 }
-module.exports = cartManagerMongo
+    
+module.exports = cartRepository
