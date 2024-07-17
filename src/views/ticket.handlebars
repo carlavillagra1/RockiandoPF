@@ -1,33 +1,9 @@
 <div class="container">
 
-    <h2>Detalles del Ticket</h2>
 
     <div class="perfil">
-        <p>Cliente: {{ticket.email}}</p>
-
-        <div>
-            <h4>Productos</h4>
-            <ul>
-                {{#each ticket.products}}
-                <li>
-                    <strong>Producto:</strong> {{title}}
-                    <strong>Precio:</strong> ${{price}}
-                    <strong>Cantidad:</strong> {{quantity}}
-                </li>
-                {{/each}}
-            </ul>
-        </div>
-
-        <div>
-            <h4>Total</h4>
-            <p>${{ticket.totalAmount}}</p>
-        </div>
-
-        <div>
-            <h4>Fecha de Creación</h4>
-            <p>{{ticket.createdAt}}</p>
-        </div>
-
+    <h2>¡Gracias por tu compra!</h2>
+        <h4>Los detalles de tu compra fueron enviados a tu email {{ticket.email}} </h4>
     </div>
     <div class="volver">
         <a href="/api/views/home">Volver a home</a>

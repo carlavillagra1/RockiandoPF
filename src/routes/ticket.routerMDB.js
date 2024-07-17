@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const ticketController = require('../controllers/ticketControllers.js');
-const { isAuthenticated  } = require('../public/js/auth.js'); 
+const { isAuthenticated , isUser } = require('../public/js/auth.js'); 
 
-router.post('/', isAuthenticated , ticketController.createTicket);
-router.get('/:ticketId', isAuthenticated , ticketController.getTicketById);
+router.get('/:ticketId', isAuthenticated ,  isUser,  ticketController.getTicketById);
 
 
 module.exports = router;

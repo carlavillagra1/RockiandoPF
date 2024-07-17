@@ -4,6 +4,7 @@ const productManagerMongo = require("../dao/productRepository.js");
 const productManager = new productManagerMongo();
 const TicketService = require("../services/ticketService.js");
 const ticketService = new  TicketService()
+const UserDTO = require("../dao/dto/userDTO.js")
 
 exports.home = async (req, res) => {
     try {
@@ -99,11 +100,7 @@ exports.register = (req, res) => {
 };
 
 exports.profile = (req, res) => {
-    // Redacta parte del email para mayor seguridad
-    const user = {
-        ...req.session.user,
-        email: req.session.user.email.replace(/(.{2})(.*)(?=@)/, "$1***")
-    };
+    const user = new UserDTO(req.session.user);
     console.log('Datos de sesión:', req.session.user);
     res.render('profile', { style: 'index.css', user });
 };
